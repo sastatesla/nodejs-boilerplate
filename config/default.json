@@ -1,6 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_SERVER}/${MONGODB_MAIN_DB_NAME}?retryWrites=true&w=majority",
-  "jwtSecret": "your_jwt_secret",
-  "jwtExpiration": "24h",
-  "otpExpiration": 1
-}
