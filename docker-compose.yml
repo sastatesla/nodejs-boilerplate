@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "4012:4012"
+    environment:
+      - DEBUG=false
+      - ENVIRONMENT=development
+      - PORT=4012
+      - IP_ADDRESS=localhost
+      - OTP_EXPIRATION_IN_MINUTES=1
+      - JWT_TOKEN_EXPIRATION=24h
+      - JWT_SECRET_KEY=arererererererrcfdrcjfgh454gftd
+      - SENTRY_DNS=
+      - MONGO_URI=mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongo/${MONGODB_MAIN_DB_NAME}?authSource=admin
+      - REDIS_SERVER_USERNAME=${REDIS_SERVER_USERNAME}
+      - REDIS_SERVER_HOST=${REDIS_SERVER_HOST}
+      - REDIS_SERVER_PORT=${REDIS_SERVER_PORT}
+      - REDIS_SERVER_PASSWORD=${REDIS_SERVER_PASSWORD}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
